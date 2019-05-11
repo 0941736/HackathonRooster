@@ -30,7 +30,7 @@ public class UIDConverter {
 	public String getCode(String UID) {
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT reserver FROM DymmyUIDs.uid WHERE uid.uid = '" + UID + "';");
+			ResultSet result = statement.executeQuery("SELECT reserver FROM DummyUIDs.uid WHERE uid.uid = '" + UID + "';");
 			
 			if(!result.next()) {
 				return "";
