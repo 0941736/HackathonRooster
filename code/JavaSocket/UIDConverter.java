@@ -28,15 +28,17 @@ public class UIDConverter {
 	}
 	
 	public String getCode(String UID) {
-		String returnString = "";
 		try {
 			Statement statement = conn.createStatement();
 			ResultSet result = statement.executeQuery("SELECT reserver FROM DymmyUIDs.uid WHERE uid.uid = '" + UID + "';");
-			returnString += result.getString(0);
+			
+			if(!result.next()) {
+				return "";
+			}
+			return result.getString(1);
 		} catch(SQLException e) {
+			e.printStackTrace();
 			return "";
 		}
-		
-		return returnString;
 	}
 }
