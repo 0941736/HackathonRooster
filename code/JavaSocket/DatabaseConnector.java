@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 
 public class DatabaseConnector{
 	private Connection conn;
-	private UIDConverter uidCon;
+	private UIDConverter uidCon = new UIDConverter();
 	
 	public DatabaseConnector() {
 		// Get the Driver needed for the Database.
