@@ -22,11 +22,11 @@ public class DatabaseConnector{
 		
 		// Connect to the locally running database.
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ClassroomRadar","gewad","");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ClassroomRadar","gewad","gewad");
+			System.out.println("Connected to the Reservation Database.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Connected to the Reservation Database.");
 	}
 	
 	public String getDataPacket(String roomNr) {

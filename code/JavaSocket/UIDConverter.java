@@ -20,7 +20,7 @@ public class UIDConverter {
 		
 		// Connect to the UID database
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DummyUIDs","gewad","");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DummyUIDs","gewad","gewad");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
