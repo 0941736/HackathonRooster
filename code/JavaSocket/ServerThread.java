@@ -41,8 +41,11 @@ public class ServerThread extends Thread {
 		while (!stopped) {
 			exchangeData();
 			
-			if(!socket.isBound()) {
+			try {
+				socket.close();
 				stopped = true;
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
