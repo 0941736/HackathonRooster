@@ -22,7 +22,7 @@ public class DatabaseConnector{
 		
 		// Connect to the locally running database.
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ClassroomRadar?autoReconnect=true&useSSL=false","root","ke3GFsJm!");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ClassroomRadar","gewad","");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
