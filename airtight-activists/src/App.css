@@ -49,8 +49,3 @@
   /* flex-direction: row; */
   align-items: center;
 }
-.Footer {
-  flex-shrink: 0;
-  margin-left: -50px;
-  margin-right: -15px;
-}

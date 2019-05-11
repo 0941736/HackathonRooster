@@ -2,6 +2,12 @@ import React, { Component } from "react";
 
 import "./ClassRooms.css";
 
+var url = "ws://192.168.43.54:8088"; // menno telefoon
+const socket = new WebSocket(url);
+socket.addEventListener("open", function(event) {
+  socket.send("classroom");
+});
+
 export default class ClassRooms extends Component {
   render() {
     // return (

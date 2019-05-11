@@ -6,34 +6,31 @@ import "./App.css";
 import ClassRooms from "./Components/ClassRooms";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
+import RoomPath from "./Components/RoomPath";
 
 var url = "ws://192.168.43.119:8088"; // when using gerard
 // var url = "ws://192.168.1.104:8088"; // when using hackathon
-// var url = "ws://192.168.43.59:8088"; // menno telefoon
+// var url = "ws://192.168.43.54:8088"; // menno telefoon
 const socket = new WebSocket(url);
-var tempTester;
 function App() {
+  var tempTester;
   socket.addEventListener("open", function(event) {
-    socket.send("");
+    socket.send("app");
   });
-  var t = "H.1.099;H.1.204;H.1.104;H.1.100";
-  // var t = "";
+  var t = "H.1.110;H.1.114;H.1.204;H.1.312;H.1.403";
   socket.addEventListener("message", function(event) {
-    alert("Response from webSocket: " + event.data);
     var res = event.data.split(";").sort();
-    tempTester = res;
+    tempTester = res.sort();
+    alert("Response from webSocket: " + event.data);
     console.log(tempTester);
-
-    // tempTester = event.data;
-    // alert("Res: " + tempTester);
   });
   socket.onopen = function(event) {
     socket.send("Hello world");
   };
-  if (socket.readyState != socket.OPEN) {
-    console.log("not connected");
-    var tempTester = t.split(";");
-    tempTester.sort();
+  if (socket.readyState !== socket.OPEN) {
+    // console.log("not connected");
+    var temp = t.split(";");
+    tempTester = temp.sort();
   }
   // tempTester = [];
   // var tempTester = ["first", "second", "third", "fourth"];
@@ -55,11 +52,11 @@ function App() {
             <Booker value={tempTester} time="08:30" classrooms={tempTester} /> //tempTester[0]
           )}
         </div>
-
         <div className="Background">
           <img src={Verd1} className="Floor-image" alt="H1 floor" />
         </div>
-        <Footer className="Footer" />
+        <RoomPath />
+        <Footer />
       </div>
     </div>
   );
@@ -67,15 +64,19 @@ function App() {
 
 function lokaalReservationRequest(lokaal, begintijd, naam, werkplekken) {
   var request = lokaal + ";" + begintijd + ";" + naam + ";" + werkplekken;
-  if (socket.readyState === socket.open) socket.send(request);
-  else {
+  try {
+    socket.send(request);
+  } catch {
     console.log(
       "There has been a connection error with the server, please try again later."
     );
-    // alert(
-    //   "There has been a connection error with the server, please try again later."
-    // );
   }
+  // if (socket.readyState === socket.open) socket.send(request);
+  // else {
+  //   console.log(
+  //     "There has been a connection error with the server, please try again later."
+  //   );
+  // }
 }
 
 class Booker extends Component {
@@ -104,6 +105,13 @@ class Booker extends Component {
   };
 
   handleSubmit(event) {
+    event.preventDefault();
+    lokaalReservationRequest(
+      this.state.value,
+      this.state.time,
+      this.state.naam,
+      this.state.aantalWerkplekken
+    );
     alert(
       "A reservation was made for \nRoom: " +
         this.state.value +
@@ -114,13 +122,6 @@ class Booker extends Component {
         "\nFor '" +
         this.state.aantalWerkplekken +
         "' person(s)."
-    );
-    event.preventDefault();
-    lokaalReservationRequest(
-      this.state.value,
-      this.state.time,
-      this.state.naam,
-      this.state.aantalWerkplekken
     );
   }
 
@@ -143,7 +144,7 @@ class Booker extends Component {
           <label>Begintijd:</label>
           <input
             id="begintijd"
-            type="text"
+            type="time"
             value={this.state.time}
             onChange={this.handleChange}
           />

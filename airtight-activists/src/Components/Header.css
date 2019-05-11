@@ -1,6 +1,8 @@
 .logo {
   float: left;
   /* margin-top: -12px; */
+  margin-top: 8px;
+  margin-left: 13px;
   max-width: 75px;
   max-height: 75px;
 }
