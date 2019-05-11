@@ -67,8 +67,8 @@ public class DatabaseConnector{
 		
 		// Split the string up so individual argument can be used.
 		String args[] = dataString.split(";");
-		System.out.println(UID + " vs. " + args[3]);
-		if(!uidCon.getCode(UID).equalsIgnoreCase(args[3])) {
+		System.out.println(UID + " vs. " + args[4]);
+		if(!uidCon.getCode(UID).equalsIgnoreCase(args[4])) {
 			// 
 			return false;
 		}
