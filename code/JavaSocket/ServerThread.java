@@ -17,6 +17,7 @@ public class ServerThread extends Thread {
 	ObjectOutputStream objectOutput;
 	String attemptUID = "";
 	int attemptCount = 0;
+	boolean stopped = false;
 	
 	DatabaseConnector database = new DatabaseConnector();
 
@@ -36,8 +37,12 @@ public class ServerThread extends Thread {
 	}
 	
 	public void run() {
-		while (true) {
+		while (!stopped) {
 			exchangeData();
+			
+			if(!socket.isBound()) {
+				stopped = true;
+			}
 		}
 	}
 	
