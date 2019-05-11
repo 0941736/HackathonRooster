@@ -42,7 +42,7 @@ public class DatabaseConnector{
 				return null;
 			}
 			
-			returnString = result.getString(1);
+			returnString = result.getString(1).replaceAll("[- :]", "");
 			for(int i = 2; i < 6; i++) {
 				returnString += ";" + result.getString(i).replaceAll("[- :]", "");
 			}
