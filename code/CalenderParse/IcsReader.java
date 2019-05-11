@@ -1,5 +1,6 @@
+package app;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class IcsReader{
@@ -34,8 +35,8 @@ public class IcsReader{
 					{
 						System.out.println(teacher);
 					}
-				System.out.println("----------------------");
-					
+					System.out.println("----------------------");
+					scan.close();
 				}
 			}
 		}
