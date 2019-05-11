@@ -44,16 +44,21 @@ public class ServerThread extends Thread {
 	public void exchangeData() {
 		System.out.println("Waiting for input.");
 		String message = waitForInput();
+		System.out.print("Received: " + message);
 		String args[] = message.split(";");
 		switch(Integer.parseInt(args[0])){
 		
 			case 0: // ESP requests data about his room.
+				System.out.println(". A request for a data packet.");
+				
 				// Get the data from the database and return it to the ESP.
 				String data = database.getDataPacket(args[1]);
 				output.println(data);
 			break;
 				
 			case 1: // A card has been scanned.
+				System.out.println(". Checking if the card that was scanned is the reserver's.");
+				
 				if (database.isReserver(args[1], args[2])){
 					output.println(1); // The scanned card belonged to the reserver.
 				} else {
@@ -63,6 +68,10 @@ public class ServerThread extends Thread {
 				
 				
 			case 2: // Reservation has expired due to not checking in.
+				System.out.println(". Expiring the thinges due to not checking in.");
+				
+				System.out.println(". A request for a data packet.");
+				
 				database.clearRoom(args[1]); // Makes the room available again.
 			break;
 		}

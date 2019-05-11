@@ -38,12 +38,11 @@ public class DatabaseConnector{
 					"WHERE end > NOW() && reservation.room = \r\n" + 
 					"(SELECT id FROM ClassroomRadar.room WHERE code = '" + roomNr + "')");
 			
-			if(!result.next()) {
-				return null;
-			}
-			
 			returnString = getTimeString();
 			for(int i = 0; i < 4; i++) {
+				if(result.getString(i) == null) {
+					return null;
+				}
 				returnString += ";" + result.getString(i).replaceAll("[- :]", "");
 			}
 		} catch (SQLException e) {
