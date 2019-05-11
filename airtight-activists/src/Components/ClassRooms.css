@@ -1,0 +1,5 @@
+.NoDot {
+  list-style: none;
+  float: left;
+  max-width: 15vw;
+}
