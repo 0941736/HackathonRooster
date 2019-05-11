@@ -13,12 +13,13 @@ public class ServerMain {
 
 	public ServerMain() {
 		try {
+			DatabaseConnector database = new DatabaseConnector();
 			ServerSocket server = new ServerSocket(6789, 100); 
 			while (!stopped) {
 				System.out.println("Waiting...");
 				Socket socket = server.accept();
 				System.out.println("Connected with: " + socket.getInetAddress());
-				new ServerThread(socket).start();
+				new ServerThread(socket, database).start();
 			}
 			server.close();
 		} catch (IOException e) {

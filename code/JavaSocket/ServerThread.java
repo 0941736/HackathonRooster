@@ -19,12 +19,13 @@ public class ServerThread extends Thread {
 	int attemptCount = 0;
 	boolean stopped = false;
 	
-	DatabaseConnector database = new DatabaseConnector();
+	DatabaseConnector database;
 
 	//private SQLReader SQL = new SQLReader();
 
-	public ServerThread(Socket inputSocket) {
+	public ServerThread(Socket inputSocket, DatabaseConnector database) {
 		this.socket = inputSocket;
+		this.database = database;
 		try {
 			this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			this.output = new PrintStream(socket.getOutputStream());
