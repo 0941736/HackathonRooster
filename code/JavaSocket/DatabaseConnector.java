@@ -42,8 +42,8 @@ public class DatabaseConnector{
 				return null;
 			}
 			
-			returnString = result.getString(0);
-			for(int i = 1; i < 5; i++) {
+			returnString = result.getString(1);
+			for(int i = 2; i < 6; i++) {
 				returnString += ";" + result.getString(i).replaceAll("[- :]", "");
 			}
 		} catch (SQLException e) {
